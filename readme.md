@@ -34,6 +34,7 @@ Frontend stuff:
 * updated the style of the UI to not be so ugly
 
 Also cleaned up the code a bit:
+- Fixed the עgit ignore file to ignore unnecessary files
 - removed duplicate stuff
 - made errors more consistent
 - added some docs
