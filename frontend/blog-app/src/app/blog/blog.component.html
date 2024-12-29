@@ -1,0 +1,64 @@
+<div class="blog-container">
+  <div class="posts-list">
+    <h2>Blog Posts</h2>
+    <ul>
+      <li *ngFor="let post of posts" 
+          (click)="loadPostDetails(post.id)"
+          [class.active]="postDetails?.id === post.id">
+        {{ post.title }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="postDetails" class="post-details">
+    <h2>{{ postDetails.title }}</h2>
+    <p class="description">{{ postDetails.description }}</p>
+    <p class="content">{{ postDetails.content }}</p>
+  </div>
+
+  <div class="create-post">
+    <h2>Create New Post</h2>
+    <form #postForm="ngForm" (ngSubmit)="createPost(postForm)" class="post-form">
+      <div class="form-group">
+        <label for="title">Title: </label>
+        <input 
+          id="title"
+          name="title"
+          [(ngModel)]="newPost.title"
+          required
+          #title="ngModel">
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+          <div *ngIf="title.errors?.['required']">Title is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description: </label>
+        <input 
+          id="description"
+          name="description"
+          [(ngModel)]="newPost.description"
+          required
+          #description="ngModel">
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+          <div *ngIf="description.errors?.['required']">Description is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Content: </label>
+        <textarea 
+          id="content"
+          name="content"
+          [(ngModel)]="newPost.content"
+          required
+          #content="ngModel"></textarea>
+        <div *ngIf="content.invalid && (content.dirty || content.touched)" class="error">
+          <div *ngIf="content.errors?.['required']">Content is required</div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="postForm.invalid">Submit</button>
+    </form>
+  </div>
+</div>
